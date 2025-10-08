@@ -75,7 +75,7 @@
         <img src="{% static 'assets/img/my-profile.png' %}" alt="Peter Ndindi Mbuthia" class="img-fluid rounded-circle" />
       </div>
 
-      <a href="index.html" class="logo d-flex align-items-center justify-content-center"><h1 class="sitename">Peter Ndindi</h1></a>
+      <a href="" class="logo d-flex align-items-center justify-content-center"><h1 class="sitename">Peter Ndindi</h1></a>
 
       <div class="social-links text-center">
         <a href="https://www.github.com/PydevG" class="twitter"><i class="bi bi-github"></i></a>
@@ -110,19 +110,15 @@
     </header>
 
     <main class="main">
-      <!-- Hero Section -->
-      <section id="hero" class="hero section">
-        <img src="{% static 'assets/img/hero-bg.png' %}" alt="" data-aos="fade-in" class="" />
-
-        <div class="container" data-aos="fade-up" data-aos-delay="100" style="color: var(--primary)">
-          <h2>Peter Ndindi Mbuthia</h2>
+      <!-- Hero Section with Background Image -->
+      <section id="hero" class="hero section" style="background: linear-gradient(rgba(10, 15, 45, 0.8), rgba(138, 43, 226, 0.7)), url('{% static 'assets/img/hero-bg.png' %}') center/cover no-repeat;">
+        <div class="container" data-aos="fade-up" data-aos-delay="100" style="color: white;">
+          <h2 class='text-white'>Peter Ndindi Mbuthia</h2>
           <p>
             I'm <span class="typed" data-typed-items="a Software Engineer, a Graphics Designer, a Python Developer, a Backend Specialist, a Freelancer">Software Engineer</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span>
           </p>
         </div>
       </section>
-      <!-- /Hero Section -->
-
       <!-- About Section -->
       <section id="about" class="about section">
         <!-- Section Title -->
@@ -402,7 +398,7 @@
       </section>
       <!-- /Resume Section -->
 
-<!-- Portfolio Section -->
+      <!-- Portfolio Section -->
       <section id="portfolio" class="portfolio section light-background">
         <div class="container section-title" data-aos="fade-up">
           <h2>My Portfolio</h2>
@@ -419,59 +415,70 @@
 
           <!-- Portfolio Masonry Grid -->
           <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-
-            <!-- Software Projects -->
-            {% for project in software_projects %}
-            <div class="col-lg-4 col-md-6 portfolio-item software">
-              <div class="portfolio-wrap">
-                <img src="{{ project.image.url}}" class="img-fluid" alt="{{ project.title }}">
-                <div class="portfolio-info">
-                  <h4>{{ project.title }}</h4>
-                  <p>{{ project.technologies|truncatewords:5 }}</p>
-                  <div class="portfolio-links">
-                    {% if project.project_url %}
-                    <a href="{{ project.project_url }}" target="_blank" title="Live Demo"><i class="bi bi-box-arrow-up-right"></i></a>
-                    {% endif %}
-                    {% if project.github_url %}
-                    <a href="{{ project.github_url }}" target="_blank" title="Source Code"><i class="bi bi-github"></i></a>
-                    {% endif %}
-                    <a href="#" class="portfolio-details" 
-                      data-title="{{ project.title }}"
-                      data-description="{{ project.description }}"
-                      data-technologies="{{ project.technologies }}"
-                      data-date="{{ project.completion_date|date:'F Y' }}">
-                      <i class="bi bi-info-circle"></i>
-                    </a>
-                  </div>
+          <!-- Software Projects -->
+          {% for project in software_projects %}
+          <div class="col-lg-4 col-md-6 portfolio-item software">
+            <div class="portfolio-wrap">
+              {% if project.image and project.image.url %}
+              <img src="{{ project.image.url }}" class="img-fluid portfolio-image" alt="{{ project.title }}" 
+                  onerror="this.onerror=null; this.src='{% static 'assets/img/portfolio/default-project.jpg' %}'">
+              {% else %}
+              <img src="{% static 'assets/img/portfolio/default-project.jpg' %}" class="img-fluid portfolio-image" alt="{{ project.title }}">
+              {% endif %}
+              <div class="portfolio-info">
+                <h4 class='text-white'>{{ project.title }}</h4>
+                <p>{{ project.technologies|truncatewords:5 }}</p>
+                <div class="portfolio-links">
+                  {% if project.project_url %}
+                  <a href="{{ project.project_url }}" target="_blank" title="Live Demo"><i class="bi bi-box-arrow-up-right"></i></a>
+                  {% endif %}
+                  {% if project.github_url %}
+                  <a href="{{ project.github_url }}" target="_blank" title="Source Code"><i class="bi bi-github"></i></a>
+                  {% endif %}
+                  <a href="#" class="portfolio-details" 
+                    data-title="{{ project.title }}"
+                    data-description="{{ project.description }}"
+                    data-technologies="{{ project.technologies }}"
+                    data-date="{{ project.completion_date|date:'F Y' }}">
+                    <i class="bi bi-info-circle"></i>
+                  </a>
                 </div>
               </div>
             </div>
-            {% endfor %}
+          </div>
+          {% endfor %}
 
-            <!-- Design Projects -->
-            {% for design in graphic_designs %}
-            <div class="col-lg-4 col-md-6 portfolio-item design">
-              <div class="portfolio-wrap">
-                <img src="{{ design.image.url }}" class="img-fluid" alt="{{ design.title }}">
-                {% comment %} <img src="{% static 'assets/img/hero-bck.jpg'%}" class="img-fluid" alt="{{ design.title }}"> {% endcomment %}
-                <div class="portfolio-info">
-                  <h4>{{ design.title }}</h4>
-                  <p>{{ design.tools_used|truncatewords:4 }}</p>
-                  <div class="portfolio-links">
-                    <a href="{{ design.image.url }}" data-glightbox="design-gallery" data-title="{{ design.title }}" title="View Image"><i class="bi bi-zoom-in"></i></a>
-                    <a href="#" class="portfolio-details"
-                      data-title="{{ design.title }}"
-                      data-description="{{ design.description }}"
-                      data-tools="{{ design.tools_used }}"
-                      data-client="{{ design.client }}"
-                      data-date="{{ design.project_date|date:'F Y' }}">
-                      <i class="bi bi-info-circle"></i>
-                    </a>
-                  </div>
+          <!-- Design Projects -->
+          {% for design in graphic_designs %}
+          <div class="col-lg-4 col-md-6 portfolio-item design">
+            <div class="portfolio-wrap">
+              {% if design.image and design.image.url %}
+              <img src="{{ design.image.url }}" class="img-fluid portfolio-image" alt="{{ design.title }}"
+                  onerror="this.onerror=null; this.src='{% static 'assets/img/portfolio/default-project.jpg' %}'">
+              {% else %}
+              <img src="{% static 'assets/img/portfolio/default-project.jpg' %}" class="img-fluid portfolio-image" alt="{{ design.title }}">
+              {% endif %}
+              <div class="portfolio-info">
+                <h4 class='text-white'>{{ design.title }}</h4>
+                <p>{{ design.tools_used|truncatewords:4 }}</p>
+                <div class="portfolio-links">
+                  <a href="{% if design.image and design.image.url %}{{ design.image.url }}{% else %}{% static 'assets/img/portfolio/default-project.jpg' %}{% endif %}" 
+                    data-glightbox="design-gallery" data-title="{{ design.title }}" title="View Image">
+                    <i class="bi bi-zoom-in"></i>
+                  </a>
+                  <a href="#" class="portfolio-details"
+                    data-title="{{ design.title }}"
+                    data-description="{{ design.description }}"
+                    data-tools="{{ design.tools_used }}"
+                    data-client="{{ design.client }}"
+                    data-date="{{ design.project_date|date:'F Y' }}">
+                    <i class="bi bi-info-circle"></i>
+                  </a>
                 </div>
               </div>
             </div>
-            {% endfor %}
+          </div>
+          {% endfor %}
 
             {% if not software_projects and not graphic_designs %}
             <div class="col-12 text-center py-5">
@@ -482,10 +489,50 @@
             {% endif %}
           </div>
 
-          <!-- Load More Button -->
-          <div class="text-center mt-4">
-            <button class="btn btn-primary px-4 load-more">Load More</button>
+          <!-- Pagination -->
+          {% if projects_page.has_other_pages %}
+          <div class="text-center mt-5">
+            <nav aria-label="Portfolio pagination">
+              <ul class="pagination justify-content-center">
+                {% if projects_page.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ projects_page.previous_page_number }}#portfolio" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                  <span class="page-link">&laquo;</span>
+                </li>
+                {% endif %}
+
+                {% for i in projects_page.paginator.page_range %}
+                  {% if projects_page.number == i %}
+                  <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+                  {% else %}
+                  <li class="page-item"><a class="page-link" href="?page={{ i }}#portfolio">{{ i }}</a></li>
+                  {% endif %}
+                {% endfor %}
+
+                {% if projects_page.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ projects_page.next_page_number }}#portfolio" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                  <span class="page-link">&raquo;</span>
+                </li>
+                {% endif %}
+              </ul>
+            </nav>
+            
+            <div class="text-muted mt-2">
+              Page {{ projects_page.number }} of {{ projects_page.paginator.num_pages }}
+            </div>
           </div>
+          {% endif %}
         </div>
       </section>
 
@@ -690,118 +737,227 @@
     <div id="preloader"></div>
 
     {% comment %} custom js {% endcomment %}
-    <script>
-      // Portfolio Filtering and Modal
-      document.addEventListener('DOMContentLoaded', function() {
-          // Portfolio Filtering
-          const filterButtons = document.querySelectorAll('.portfolio-filters .nav-link');
-          const portfolioItems = document.querySelectorAll('.portfolio-item');
-          
-          filterButtons.forEach(button => {
-              button.addEventListener('click', function(e) {
-                  e.preventDefault();
-                  
-                  // Remove active class from all buttons
-                  filterButtons.forEach(btn => btn.classList.remove('active'));
-                  
-                  // Add active class to clicked button
-                  this.classList.add('active');
-                  
-                  const filterValue = this.getAttribute('data-filter');
-                  
-                  // Filter portfolio items
-                  portfolioItems.forEach(item => {
-                      if (filterValue === '*' || item.classList.contains(filterValue)) {
-                          item.style.display = 'block';
-                          setTimeout(() => {
-                              item.style.opacity = '1';
-                              item.style.transform = 'scale(1)';
-                          }, 100);
-                      } else {
-                          item.style.opacity = '0';
-                          item.style.transform = 'scale(0.8)';
-                          setTimeout(() => {
-                              item.style.display = 'none';
-                          }, 300);
-                      }
-                  });
-              });
-          });
-          
-          // Portfolio Modal
-          const portfolioModal = new bootstrap.Modal(document.getElementById('portfolioModal'));
-          const portfolioDetailsLinks = document.querySelectorAll('.portfolio-details');
-          
-          portfolioDetailsLinks.forEach(link => {
-              link.addEventListener('click', function(e) {
-                  e.preventDefault();
-                  
-                  const title = this.getAttribute('data-title');
-                  const description = this.getAttribute('data-description');
-                  const technologies = this.getAttribute('data-technologies');
-                  const tools = this.getAttribute('data-tools');
-                  const client = this.getAttribute('data-client');
-                  const date = this.getAttribute('data-date');
-                  
-                  let modalContent = `
-                      <h4>${title}</h4>
-                      <p class="text-muted mb-3">${date}</p>
-                      <p>${description}</p>
-                  `;
-                  
-                  if (technologies) {
-                      modalContent += `
-                          <div class="mt-4">
-                              <h6>Technologies Used:</h6>
-                              <p class="text-primary">${technologies}</p>
-                          </div>
-                      `;
-                  }
-                  
-                  if (tools) {
-                      modalContent += `
-                          <div class="mt-4">
-                              <h6>Tools Used:</h6>
-                              <p class="text-success">${tools}</p>
-                          </div>
-                      `;
-                  }
-                  
-                  if (client) {
-                      modalContent += `
-                          <div class="mt-4">
-                              <h6>Client:</h6>
-                              <p>${client}</p>
-                          </div>
-                      `;
-                  }
-                  
-                  document.getElementById('portfolioModalTitle').textContent = title;
-                  document.getElementById('portfolioModalContent').innerHTML = modalContent;
-                  portfolioModal.show();
-              });
-          });
-          
-          // Initialize GLightbox for image gallery
-          const lightbox = GLightbox({
-              selector: '[data-glightbox]'
-          });
-      });
-    </script>
 
-    <!-- Vendor JS Files -->
-    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
-    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
-    <script src="{% static 'assets/vendor/typed.js/typed.umd.js' %}"></script>
-    <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
-    <script src="{% static 'assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
-    <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
-    <script src="{% static 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
-    <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
-    <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+        <script>
+            // Portfolio Filtering and Modal - Fixed Version
+            document.addEventListener('DOMContentLoaded', function() {
+                // Portfolio Filtering
+                const filterButtons = document.querySelectorAll('.portfolio-filters .nav-link');
+                const portfolioItems = document.querySelectorAll('.portfolio-item');
+                
+                console.log('Initializing portfolio filter with:', portfolioItems.length, 'items');
+                
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        // Remove active class from all buttons
+                        filterButtons.forEach(btn => {
+                            btn.classList.remove('active', 'bg-primary', 'text-white');
+                            btn.classList.add('text-dark');
+                        });
+                        
+                        // Add active class to clicked button
+                        this.classList.add('active', 'bg-primary', 'text-white');
+                        this.classList.remove('text-dark');
+                        
+                        const filterValue = this.getAttribute('data-filter');
+                        console.log('Filtering by:', filterValue);
+                        
+                        // Filter portfolio items
+                        portfolioItems.forEach(item => {
+                            // Check if item matches filter
+                            let shouldShow = false;
+                            
+                            if (filterValue === '*') {
+                                shouldShow = true;
+                            } else if (filterValue === '.software' && item.classList.contains('software')) {
+                                shouldShow = true;
+                            } else if (filterValue === '.design' && item.classList.contains('design')) {
+                                shouldShow = true;
+                            }
+                            
+                            // Apply display changes - FIXED: Remove opacity manipulation
+                            if (shouldShow) {
+                                item.style.display = 'block';
+                                // Remove any inline styles that might be hiding the image
+                                item.style.opacity = '';
+                                item.style.visibility = '';
+                                item.style.transform = '';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                    });
+                });
+                
+                // Initialize all items as visible - FIXED: Remove opacity manipulation
+                portfolioItems.forEach(item => {
+                    item.style.display = 'block';
+                    // Remove any inline styles that might be hiding images
+                    item.style.opacity = '';
+                    item.style.visibility = '';
+                    item.style.transform = '';
+                });
+                
+                // Portfolio Modal
+                const portfolioModal = new bootstrap.Modal(document.getElementById('portfolioModal'));
+                const portfolioDetailsLinks = document.querySelectorAll('.portfolio-details');
+                
+                portfolioDetailsLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        const title = this.getAttribute('data-title');
+                        const description = this.getAttribute('data-description');
+                        const technologies = this.getAttribute('data-technologies');
+                        const tools = this.getAttribute('data-tools');
+                        const client = this.getAttribute('data-client');
+                        const date = this.getAttribute('data-date');
+                        
+                        let modalContent = `
+                            <h4>${title}</h4>
+                            <p class="text-muted mb-3">${date}</p>
+                            <p>${description}</p>
+                        `;
+                        
+                        if (technologies) {
+                            modalContent += `
+                                <div class="mt-4">
+                                    <h6>Technologies Used:</h6>
+                                    <p class="text-primary">${technologies}</p>
+                                </div>
+                            `;
+                        }
+                        
+                        if (tools) {
+                            modalContent += `
+                                <div class="mt-4">
+                                    <h6>Tools Used:</h6>
+                                    <p class="text-success">${tools}</p>
+                                </div>
+                            `;
+                        }
+                        
+                        if (client) {
+                            modalContent += `
+                                <div class="mt-4">
+                                    <h6>Client:</h6>
+                                    <p>${client}</p>
+                                </div>
+                            `;
+                        }
+                        
+                        document.getElementById('portfolioModalTitle').textContent = title;
+                        document.getElementById('portfolioModalContent').innerHTML = modalContent;
+                        portfolioModal.show();
+                    });
+                });
+                
+                // Initialize GLightbox for image gallery
+                const lightbox = GLightbox({
+                    selector: '[data-glightbox]'
+                });
+                
+                // REMOVED the problematic image loading handler that sets opacity to 0
+                // Images will now display normally
+            });
+            </script>
 
-    <!-- Main JS File -->
-    <script src="{% static 'assets/js/main.js' %}"></script>
-  </body>
+            <style>
+            /* Portfolio Filter Styles */
+            .portfolio-filters .nav-link {
+                border: 2px solid #e9ecef;
+                border-radius: 25px;
+                padding: 10px 25px;
+                margin: 0 5px;
+                font-weight: 500;
+                transition: all 0.3s ease;
+                color: #495057;
+                background: transparent;
+                cursor: pointer;
+            }
+
+            .portfolio-filters .nav-link:hover {
+                border-color: var(--primary);
+                color: var(--primary);
+            }
+
+            .portfolio-filters .nav-link.active {
+                background: var(--primary) !important;
+                border-color: var(--primary);
+                color: white !important;
+            }
+
+            .portfolio-item {
+                transition: all 0.4s ease-in-out;
+                margin-bottom: 30px;
+            }
+
+            .portfolio-container {
+                position: relative;
+                min-height: 400px;
+            }
+
+            /* Portfolio Image Styles - Ensure images display properly */
+            .portfolio-wrap {
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                transition: all 0.3s ease;
+                background: #f8f9fa;
+            }
+
+            .portfolio-wrap img {
+                width: 100%;
+                height: 250px;
+                object-fit: cover;
+                object-position: center;
+                display: block;
+                transition: transform 0.3s ease;
+            }
+
+            .portfolio-wrap:hover img {
+                transform: scale(1.05);
+            }
+
+            .portfolio-info {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(transparent, rgba(0,0,0,0.8));
+                color: white;
+                padding: 20px;
+                transform: translateY(100%);
+                transition: transform 0.3s ease;
+            }
+
+            .portfolio-wrap:hover .portfolio-info {
+                transform: translateY(0);
+            }
+
+            /* Remove any opacity animations that might interfere */
+            .portfolio-item {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+            </style>
+
+<!-- Vendor JS Files -->
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+<script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+<script src="{% static 'assets/vendor/typed.js/typed.umd.js' %}"></script>
+<script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+<script src="{% static 'assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+<script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+<script src="{% static 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+<script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+<!-- Main JS File -->
+<script src="{% static 'assets/js/main.js' %}"></script>
+</body>
 </html>
