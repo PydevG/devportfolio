@@ -2,7 +2,7 @@
 import os
 from django.core.management.base import BaseCommand
 from django.conf import settings
-from graphics.models import GraphicDesign
+from portfolioapp.models import GraphicDesign
 from django.core.files import File
 from datetime import datetime
 

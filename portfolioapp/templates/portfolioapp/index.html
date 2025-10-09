@@ -582,200 +582,244 @@
         </div>
       </section>
       <!-- /Resume Section -->
-      <!-- Portfolio Section - Always Visible Details -->
-      <section id="portfolio" class="portfolio section light-background">
-        <div class="container section-title" data-aos="fade-up">
-          <h2>My Portfolio</h2>
-          <p>Showcasing my journey in <span class="text-primary">Software</span> & <span class="text-success">Design</span></p>
-        </div>
+        <!-- Portfolio Section - Always Visible Details -->
+        <section id="portfolio" class="portfolio section light-background">
+          <div class="container section-title" data-aos="fade-up">
+            <h2>My Portfolio</h2>
+            <p>Showcasing my journey in <span class="text-primary">Software</span> & <span class="text-success">Design</span></p>
+          </div>
 
-        <div class="container">
-          <!-- Portfolio Filters -->
-          <ul class="portfolio-filters nav nav-pills justify-content-center mb-5" data-aos="fade-up" data-aos-delay="100">
-            <li class="nav-item"><a class="nav-link active" data-filter="*">All Projects</a></li>
-            <li class="nav-item"><a class="nav-link" data-filter=".software">Software</a></li>
-            <li class="nav-item"><a class="nav-link" data-filter=".design">Design</a></li>
-          </ul>
+          <div class="container">
+            <!-- Portfolio Filters -->
+            <ul class="portfolio-filters nav nav-pills justify-content-center mb-5" data-aos="fade-up" data-aos-delay="100">
+              <li class="nav-item"><a class="nav-link active" data-filter="*">All Projects</a></li>
+              <li class="nav-item"><a class="nav-link" data-filter=".software">Software</a></li>
+              <li class="nav-item"><a class="nav-link" data-filter=".design">Design</a></li>
+            </ul>
 
-          <!-- Portfolio Grid -->
-          <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-            <!-- Software Projects -->
-            {% for project in software_projects %}
-            <div class="col-lg-4 col-md-6 portfolio-item software mb-4">
-              <div class="portfolio-card">
-                <div class="portfolio-image">
-                  {% if project.image and project.image.url %}
-                  <img src="{{ project.image.url }}" class="img-fluid" alt="{{ project.title }}" 
-                      onerror="this.onerror=null; this.src='{% static 'assets/img/portfolio/default-project.jpg' %}'">
-                  {% else %}
-                  <img src="{% static 'assets/img/portfolio/default-project.jpg' %}" class="img-fluid" alt="{{ project.title }}">
-                  {% endif %}
-                  <div class="portfolio-category">
-                    <span class="badge bg-primary">Software</span>
-                  </div>
-                </div>
-                <div class="portfolio-content">
-                  <div class="portfolio-header">
-                    <h4 class="portfolio-title">{{ project.title }}</h4>
-                    <div class="portfolio-date">
-                      <small class="text-muted">
-                        <i class="bi bi-calendar me-1"></i>
-                        {{ project.completion_date|date:"M Y" }}
-                      </small>
+            <!-- Portfolio Grid -->
+            <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+              <!-- Software Projects -->
+              {% for project in software_projects %}
+              <div class="col-lg-4 col-md-6 portfolio-item software mb-4">
+                <div class="portfolio-card">
+                  <div class="portfolio-image">
+                    {% if project.image and project.image.url %}
+                    <img src="{{ project.image.url }}" class="img-fluid" alt="{{ project.title }}" 
+                        onerror="this.onerror=null; this.src='{% static 'assets/img/portfolio/default-project.jpg' %}'">
+                    {% else %}
+                    <img src="{% static 'assets/img/portfolio/default-project.jpg' %}" class="img-fluid" alt="{{ project.title }}">
+                    {% endif %}
+                    <div class="portfolio-category">
+                      <span class="badge bg-primary">Software</span>
                     </div>
                   </div>
-                  
-                  <p class="portfolio-description">{{ project.description|truncatewords:20 }}</p>
-                  
-                  <div class="portfolio-tech">
-                    <h6>Technologies:</h6>
-                    <div class="tech-tags" data-technologies="{{ project.technologies }}">
-                      <!-- Technologies will be populated by JavaScript -->
+                  <div class="portfolio-content">
+                    <div class="portfolio-header">
+                      <h4 class="portfolio-title">{{ project.title }}</h4>
+                      <div class="portfolio-date">
+                        <small class="text-muted">
+                          <i class="bi bi-calendar me-1"></i>
+                          {{ project.completion_date|date:"M Y" }}
+                        </small>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <div class="portfolio-links">
-                    {% if project.project_url %}
-                    <a href="{{ project.project_url }}" target="_blank" class="btn btn-outline-primary btn-sm">
-                      <i class="bi bi-box-arrow-up-right me-1"></i>Live Demo
-                    </a>
-                    {% endif %}
-                    {% if project.github_url %}
-                    <a href="{{ project.github_url }}" target="_blank" class="btn btn-outline-dark btn-sm">
-                      <i class="bi bi-github me-1"></i>Source Code
-                    </a>
-                    {% endif %}
-                    <button class="btn btn-outline-info btn-sm portfolio-details" 
-                      data-title="{{ project.title }}"
-                      data-description="{{ project.description }}"
-                      data-technologies="{{ project.technologies }}"
-                      data-date="{{ project.completion_date|date:'F Y' }}">
-                      <i class="bi bi-info-circle me-1"></i>Details
-                    </button>
+                    
+                    <p class="portfolio-description">{{ project.description|truncatewords:20 }}</p>
+                    
+                    <div class="portfolio-tech">
+                      <h6>Technologies:</h6>
+                      <div class="tech-tags" data-technologies="{{ project.technologies }}">
+                        <!-- Technologies will be populated by JavaScript -->
+                      </div>
+                    </div>
+                    
+                    <div class="portfolio-links">
+                      {% if project.project_url %}
+                      <a href="{{ project.project_url }}" target="_blank" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-box-arrow-up-right me-1"></i>Live Demo
+                      </a>
+                      {% endif %}
+                      {% if project.github_url %}
+                      <a href="{{ project.github_url }}" target="_blank" class="btn btn-outline-dark btn-sm">
+                        <i class="bi bi-github me-1"></i>Source Code
+                      </a>
+                      {% endif %}
+                      <button class="btn btn-outline-info btn-sm portfolio-details" 
+                        data-title="{{ project.title }}"
+                        data-description="{{ project.description }}"
+                        data-technologies="{{ project.technologies }}"
+                        data-date="{{ project.completion_date|date:'F Y' }}">
+                        <i class="bi bi-info-circle me-1"></i>Details
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            {% endfor %}
+              {% endfor %}
 
-            <!-- Design Projects -->
-            {% for design in graphic_designs %}
-            <div class="col-lg-4 col-md-6 portfolio-item design mb-4">
-              <div class="portfolio-card">
-                <div class="portfolio-image">
-                  {% if design.image and design.image.url %}
-                  <img src="{{ design.image.url }}" class="img-fluid" alt="{{ design.title }}"
-                      onerror="this.onerror=null; this.src='{% static 'assets/img/portfolio/default-project.jpg' %}'">
-                  {% else %}
-                  <img src="{% static 'assets/img/portfolio/default-project.jpg' %}" class="img-fluid" alt="{{ design.title }}">
-                  {% endif %}
-                  <div class="portfolio-category">
-                    <span class="badge bg-success">Design</span>
-                  </div>
-                  <div class="portfolio-image-overlay">
-                    <a href="{% if design.image and design.image.url %}{{ design.image.url }}{% else %}{% static 'assets/img/portfolio/default-project.jpg' %}{% endif %}" 
-                      data-glightbox="design-gallery" data-title="{{ design.title }}" class="zoom-btn">
-                      <i class="bi bi-zoom-in"></i>
-                    </a>
-                  </div>
-                </div>
-                <div class="portfolio-content">
-                  <div class="portfolio-header">
-                    <h4 class="portfolio-title">{{ design.title }}</h4>
-                    <div class="portfolio-date">
-                      <small class="text-muted">
-                        <i class="bi bi-calendar me-1"></i>
-                        {{ design.project_date|date:"M Y" }}
-                      </small>
+              <!-- Design Projects -->
+              {% for design in graphic_designs %}
+              <div class="col-lg-4 col-md-6 portfolio-item design mb-4">
+                <div class="portfolio-card">
+                  <div class="portfolio-image">
+                    {% if design.image and design.image.url %}
+                    <img src="{{ design.image.url }}" class="img-fluid" alt="{{ design.title }}"
+                        onerror="this.onerror=null; this.src='{% static 'assets/img/portfolio/default-project.jpg' %}'">
+                    {% else %}
+                    <img src="{% static 'assets/img/portfolio/default-project.jpg' %}" class="img-fluid" alt="{{ design.title }}">
+                    {% endif %}
+                    <div class="portfolio-category">
+                      <span class="badge bg-success">Design</span>
+                    </div>
+                    <div class="portfolio-image-overlay">
+                      <a href="{% if design.image and design.image.url %}{{ design.image.url }}{% else %}{% static 'assets/img/portfolio/default-project.jpg' %}{% endif %}" 
+                        data-glightbox="design-gallery" data-title="{{ design.title }}" class="zoom-btn">
+                        <i class="bi bi-zoom-in"></i>
+                      </a>
                     </div>
                   </div>
-                  
-                  <p class="portfolio-description">{{ design.description|truncatewords:20 }}</p>
-                  
-                  <div class="portfolio-tech">
-                    <h6>Tools Used:</h6>
-                    <div class="tech-tags" data-tools="{{ design.tools_used }}">
-                      <!-- Tools will be populated by JavaScript -->
+                  <div class="portfolio-content">
+                    <div class="portfolio-header">
+                      <h4 class="portfolio-title">{{ design.title }}</h4>
+                      <div class="portfolio-date">
+                        <small class="text-muted">
+                          <i class="bi bi-calendar me-1"></i>
+                          {{ design.project_date|date:"M Y" }}
+                        </small>
+                      </div>
                     </div>
-                  </div>
-                  
-                  {% if design.client %}
-                  <div class="portfolio-client">
-                    <h6>Client:</h6>
-                    <p class="client-name">{{ design.client }}</p>
-                  </div>
-                  {% endif %}
-                  
-                  <div class="portfolio-links">
-                    <button class="btn btn-outline-info btn-sm portfolio-details"
-                      data-title="{{ design.title }}"
-                      data-description="{{ design.description }}"
-                      data-tools="{{ design.tools_used }}"
-                      data-client="{{ design.client }}"
-                      data-date="{{ design.project_date|date:'F Y' }}">
-                      <i class="bi bi-info-circle me-1"></i>Project Details
-                    </button>
+                    
+                    <p class="portfolio-description">{{ design.description|truncatewords:20 }}</p>
+                    
+                    <div class="portfolio-tech">
+                      <h6>Tools Used:</h6>
+                      <div class="tech-tags" data-tools="{{ design.tools_used }}">
+                        <!-- Tools will be populated by JavaScript -->
+                      </div>
+                    </div>
+                    
+                    {% if design.client %}
+                    <div class="portfolio-client">
+                      <h6>Client:</h6>
+                      <p class="client-name">{{ design.client }}</p>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="portfolio-links">
+                      <button class="btn btn-outline-info btn-sm portfolio-details"
+                        data-title="{{ design.title }}"
+                        data-description="{{ design.description }}"
+                        data-tools="{{ design.tools_used }}"
+                        data-client="{{ design.client }}"
+                        data-date="{{ design.project_date|date:'F Y' }}">
+                        <i class="bi bi-info-circle me-1"></i>Project Details
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            {% endfor %}
+              {% endfor %}
 
-            {% if not software_projects and not graphic_designs %}
-            <div class="col-12 text-center py-5">
-              <i class="bi bi-folder-x display-1 text-muted"></i>
-              <h4>No Projects Yet</h4>
-              <p class="text-muted">Projects will appear here once added.</p>
+              {% if not software_projects and not graphic_designs %}
+              <div class="col-12 text-center py-5">
+                <i class="bi bi-folder-x display-1 text-muted"></i>
+                <h4>No Projects Yet</h4>
+                <p class="text-muted">Projects will appear here once added.</p>
+              </div>
+              {% endif %}
+            </div>
+
+            <!-- Pagination -->
+            {% if software_projects.has_other_pages or graphic_designs.has_other_pages %}
+            <div class="text-center mt-5">
+              <div class="row justify-content-center">
+                
+                <!-- Software Projects Pagination -->
+                {% if software_projects.has_other_pages %}
+                <div class="col-auto mb-3">
+                  <div class="d-flex align-items-center">
+                    <span class="badge bg-primary me-2">Software</span>
+                    <nav aria-label="Software projects pagination">
+                      <ul class="pagination pagination-sm mb-0">
+                        {% if software_projects.has_previous %}
+                        <li class="page-item">
+                          <a class="page-link" href="?software_page={{ software_projects.previous_page_number }}&design_page={{ graphic_designs.number }}#portfolio" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                          <span class="page-link">&laquo;</span>
+                        </li>
+                        {% endif %}
+
+                        <li class="page-item disabled">
+                          <span class="page-link">{{ software_projects.number }}/{{ software_projects.paginator.num_pages }}</span>
+                        </li>
+
+                        {% if software_projects.has_next %}
+                        <li class="page-item">
+                          <a class="page-link" href="?software_page={{ software_projects.next_page_number }}&design_page={{ graphic_designs.number }}#portfolio" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                          <span class="page-link">&raquo;</span>
+                        </li>
+                        {% endif %}
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+                {% endif %}
+
+                <!-- Design Projects Pagination -->
+                {% if graphic_designs.has_other_pages %}
+                <div class="col-auto mb-3">
+                  <div class="d-flex align-items-center">
+                    <span class="badge bg-success me-2">Design</span>
+                    <nav aria-label="Design projects pagination">
+                      <ul class="pagination pagination-sm mb-0">
+                        {% if graphic_designs.has_previous %}
+                        <li class="page-item">
+                          <a class="page-link" href="?design_page={{ graphic_designs.previous_page_number }}&software_page={{ software_projects.number }}#portfolio" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                          <span class="page-link">&laquo;</span>
+                        </li>
+                        {% endif %}
+
+                        <li class="page-item disabled">
+                          <span class="page-link">{{ graphic_designs.number }}/{{ graphic_designs.paginator.num_pages }}</span>
+                        </li>
+
+                        {% if graphic_designs.has_next %}
+                        <li class="page-item">
+                          <a class="page-link" href="?design_page={{ graphic_designs.next_page_number }}&software_page={{ software_projects.number }}#portfolio" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                          <span class="page-link">&raquo;</span>
+                        </li>
+                        {% endif %}
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+                {% endif %}
+
+              </div>
             </div>
             {% endif %}
           </div>
-
-          <!-- Pagination -->
-          {% if projects_page.has_other_pages %}
-          <div class="text-center mt-5">
-            <nav aria-label="Portfolio pagination">
-              <ul class="pagination justify-content-center">
-                {% if projects_page.has_previous %}
-                <li class="page-item">
-                  <a class="page-link" href="?page={{ projects_page.previous_page_number }}#portfolio" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                {% else %}
-                <li class="page-item disabled">
-                  <span class="page-link">&laquo;</span>
-                </li>
-                {% endif %}
-
-                {% for i in projects_page.paginator.page_range %}
-                  {% if projects_page.number == i %}
-                  <li class="page-item active"><span class="page-link">{{ i }}</span></li>
-                  {% else %}
-                  <li class="page-item"><a class="page-link" href="?page={{ i }}#portfolio">{{ i }}</a></li>
-                  {% endif %}
-                {% endfor %}
-
-                {% if projects_page.has_next %}
-                <li class="page-item">
-                  <a class="page-link" href="?page={{ projects_page.next_page_number }}#portfolio" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-                {% else %}
-                <li class="page-item disabled">
-                  <span class="page-link">&raquo;</span>
-                </li>
-                {% endif %}
-              </ul>
-            </nav>
-            
-            <div class="text-muted mt-2">
-              Page {{ projects_page.number }} of {{ projects_page.paginator.num_pages }}
-            </div>
-          </div>
-          {% endif %}
-        </div>
-      </section>
+        </section>
 
 
         <!-- Portfolio Modal -->
