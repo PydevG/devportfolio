@@ -636,12 +636,12 @@
                     
                     <div class="portfolio-links">
                       {% if project.project_url %}
-                      <a href="{{ project.project_url }}" target="_blank" class="btn btn-outline-primary btn-sm">
-                        <i class="bi bi-box-arrow-up-right me-1"></i>Live Demo
+                      <a href="{{ project.project_url }}" target="_blank" class="btn btn-primary btn-outline-primary btn-sm">
+                        <i class="bi bi-box-arrow-up-right me-1"></i><span class='text-white'><strong>Live Demo</strong></span>
                       </a>
                       {% endif %}
                       {% if project.github_url %}
-                      <a href="{{ project.github_url }}" target="_blank" class="btn btn-outline-dark btn-sm">
+                      <a href="{{ project.github_url }}" target="_blank" class="btn btn-primary btn-outline-dark btn-sm">
                         <i class="bi bi-github me-1"></i>Source Code
                       </a>
                       {% endif %}
