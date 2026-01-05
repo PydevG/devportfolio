@@ -12,7 +12,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', cast=bool, default=False)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['https://devportfolio-g0jc.onrender.com/', 'devportfolio-g0jc.onrender.com/', 'https://www.stalog.cloud', 'stalog.cloud']
 
 INSTALLED_APPS = [
     'jazzmin',
